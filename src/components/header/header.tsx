@@ -7,8 +7,11 @@ export default function Header() {
     <AppBar sx={{
       backgroundColor: 'rgb(15, 22, 36)',
       borderBottom: '1px solid rgb(25, 28, 36)',
-      boxShadow: '0 4px 2px -2px rgba(255, 255, 255, 0.2)'
-    }} position="static">
+      boxShadow: '0 4px 2px -2px rgba(255, 255, 255, 0.2)',
+
+    }} position="fixed"
+
+    >
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Stack sx={{ cursor: 'pointer' }} onClick={() => window.location.href = '/'} >
           <Box

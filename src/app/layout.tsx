@@ -16,8 +16,8 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Header />
-          <Box component="main" sx={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'rgb(20, 27, 42)' }}>
-            <Container sx={{ flex: 1, display: 'flex', flexDirection: 'column', mt: 4, mb: 4 }}>
+          <Box component="main" sx={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'rgb(20, 27, 42)', marginTop: '64px' }}>
+            <Container sx={{ flex: 1, display: 'flex', flexDirection: 'column', mb: 4 }}>
               {children}
             </Container>
           </Box>
