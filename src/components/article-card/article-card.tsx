@@ -49,6 +49,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ title, description, tags, ima
               textOverflow: 'ellipsis',
               width: '100%',
               fontWeight: 'bold',
+              fontFamily: 'serif'
             }}
           >
             {title}

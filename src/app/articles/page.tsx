@@ -5,12 +5,11 @@ import ArticleCard from '@/components/article-card/article-card';
 
 const articles = [
   {
-    title: 'Introdução ao React',
-    description: 'Aprenda os conceitos básicos do React e como começar a desenvolver aplicações.',
-    tags: ['React', 'JavaScript', 'Frontend'],
+    title: 'Essa é a melhor forma que encontrei para pegar um elemento de matriz',
+    description: 'Tem uma truque muito legal do TypeScript: Array[number].',
+    tags: ['typescript'],
     image: bannerImage.src,
-    link: '/articles/name-01'
-
+    link: '/articles/30122024'
   },
   {
     title: 'Guia Completo de JavaScript',
