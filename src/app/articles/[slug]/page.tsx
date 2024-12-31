@@ -1,14 +1,23 @@
 import { Button, Stack, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { readFileSync } from "node:fs";
 import Link from "next/link";
 import MarkdownComponent from "@/components/markdown/markdown-component";
+import { readFile } from "fs/promises";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = await params;
-  const info = readFileSync(`src/_shared/post/info/${id}.json`, "utf-8");
-  const parsedInfo = JSON.parse(info) as { path: string; title: string };
-  const post = readFileSync(parsedInfo.path, "utf-8");
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const info = await readFile(`src/_shared/post/info/${slug}.json`);
+  const parsedInfo = JSON.parse(info.toString()) as {
+    path: string;
+    title: string;
+  };
+
+  const post = await readFile(parsedInfo.path, "utf-8");
 
   return (
     <Stack marginTop={4} alignItems={"center"}>
