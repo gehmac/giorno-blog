@@ -10,7 +10,6 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-
   const info = await readFile(`src/_shared/post/info/${slug}.json`);
   const parsedInfo = JSON.parse(info.toString()) as {
     path: string;
