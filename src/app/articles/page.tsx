@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
-import bannerImage from "../../_shared/assets/article.png";
+import bannerImage from "../../shared/assets/article.png";
 import ArticleCard from "@/components/article-card/article-card";
-import postImage from "../../_shared/assets/post/30122024.png";
+import postImage from "../../shared/assets/post/30122024.png";
 
 const articles = [
   {
