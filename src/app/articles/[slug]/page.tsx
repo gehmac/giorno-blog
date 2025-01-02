@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Link from "next/link";
 import MarkdownComponent from "@/components/markdown/markdown-component";
-import { readFile } from "fs/promises";
+import PostService from "@/service/post-request";
 
 export default async function Page({
   params,
@@ -10,13 +10,7 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const info = await readFile(`src/shared/post/info/${slug}.json`);
-  const parsedInfo = JSON.parse(info.toString()) as {
-    path: string;
-    title: string;
-  };
-
-  const post = await readFile(parsedInfo.path, "utf-8");
+  const parsedInfo = await PostService.getPostInfo(slug);
 
   return (
     <Stack marginTop={4} alignItems={"center"}>
@@ -43,7 +37,7 @@ export default async function Page({
               fontFamily: "serif",
             }}
           >
-            {parsedInfo && parsedInfo.title}
+            {parsedInfo.title}
           </Typography>
           {/* {bannerImage.src && (
             <Box
@@ -64,7 +58,7 @@ export default async function Page({
           </Stack> */}
         </Stack>
         <Stack width={"100%"}>
-          <MarkdownComponent content={post} />
+          <MarkdownComponent content={parsedInfo.body} />
         </Stack>
       </Stack>
     </Stack>
