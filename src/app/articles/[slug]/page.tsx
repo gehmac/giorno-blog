@@ -1,17 +1,38 @@
+'use client'
 import { Button, Stack, Typography } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Link from "next/link";
 import MarkdownComponent from "@/components/markdown/markdown-component";
+import { useEffect, useState } from "react";
+import { Post } from "@/service/post-type";
 import PostService from "@/service/post-request";
+import { useParams } from "next/navigation";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const parsedInfo = await PostService.getPostInfo(slug);
+export default function Page() {
+  const params = useParams()
+  const [postInfo, setPostInfo] = useState<Post | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    console.log(params.slug);
+
+    if (params.slug) {
+      PostService.getPostInfo(String(params.slug))
+        .then((info) => {
+          setPostInfo(info);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('Failed to fetch post info:', err);
+          setError('Failed to load the post information.');
+          setLoading(false);
+        });
+    }
+  }, [params.slug]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <Stack marginTop={4} alignItems={"center"}>
       <Stack width={"70%"} alignItems={"flex-start"}>
@@ -37,7 +58,7 @@ export default async function Page({
               fontFamily: "serif",
             }}
           >
-            {parsedInfo.title}
+            {postInfo?.title}
           </Typography>
           {/* {bannerImage.src && (
             <Box
@@ -58,7 +79,7 @@ export default async function Page({
           </Stack> */}
         </Stack>
         <Stack width={"100%"}>
-          <MarkdownComponent content={parsedInfo.body} />
+          {postInfo && <MarkdownComponent content={postInfo.body} />}
         </Stack>
       </Stack>
     </Stack>
