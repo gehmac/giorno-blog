@@ -15,8 +15,6 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(params.slug);
-
     if (params.slug) {
       PostService.getPostInfo(String(params.slug))
         .then((info) => {
