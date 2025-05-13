@@ -12,7 +12,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+        style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          minHeight: "100vh" 
+        }}
       >
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -24,11 +28,10 @@ export default function RootLayout({
               display: "flex",
               flexDirection: "column",
               backgroundColor: "rgb(20, 27, 42)",
-              marginTop: "64px",
             }}
           >
             <Container
-              sx={{ flex: 1, display: "flex", flexDirection: "column", mb: 4 }}
+              sx={{ flex: 1, display: "flex", flexDirection: "column" }}
             >
               {children}
             </Container>

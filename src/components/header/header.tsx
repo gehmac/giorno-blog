@@ -1,16 +1,29 @@
 import Link from "next/link";
 import { AppBar, Toolbar, Button, Box, Stack } from "@mui/material";
 import logo from "@/shared/assets/logo-hor-branc.png";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <AppBar
       sx={{
         backgroundColor: "rgb(15, 22, 36)",
         borderBottom: "1px solid rgb(25, 28, 36)",
-        boxShadow: "0 4px 2px -2px rgba(255, 255, 255, 0.2)",
+        boxShadow: "0 4px 2px -2px rgb(95, 9, 129)",
+        transition: "box-shadow 0.3s, background-color 0.3s, border-bottom 0.3s, top 0.3s",
       }}
-      position="fixed"
+      position={isFixed ? "fixed" : "static"}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Stack
