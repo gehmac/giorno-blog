@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Post } from "@/service/post-type";
 import PostService from "@/service/post-request";
 import { useParams } from "next/navigation";
+import LoadingSearch from "@/components/loadings/loading-search";
 
 export default function Page() {
   const params = useParams()
@@ -29,7 +30,7 @@ export default function Page() {
     }
   }, [params.slug]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingSearch />;
   if (error) return <div>Error: {error}</div>;
   return (
     <Stack marginTop={4} alignItems={"center"}>
@@ -58,23 +59,6 @@ export default function Page() {
           >
             {postInfo?.title}
           </Typography>
-          {/* {bannerImage.src && (
-            <Box
-              component="img"
-              src={bannerImage.src}
-              sx={{
-                margin: "auto",
-                width: "200px",
-              }}
-            />
-          )} */}
-          {/* <Stack margin={"20px 0"}>
-            <RoundedImageCard
-              imageSrc={bannerImage.src}
-              subtitle="aaaaaaaa"
-              title="sssssssssss"
-            />
-          </Stack> */}
         </Stack>
         <Stack width={"100%"}>
           {postInfo && <MarkdownComponent content={postInfo.body} />}

@@ -10,11 +10,6 @@ export default class PostService {
       5000
     );
 
-    if (response.status !== 200) {
-      console.error("Error fetching post info:", response.statusText);
-      return undefined;
-    }
-
     return response.data ?? undefined;
   }
 }
