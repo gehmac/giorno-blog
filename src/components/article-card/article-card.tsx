@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Card,
@@ -8,11 +9,14 @@ import {
   Stack,
   Box,
   Button,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { ArticleCardProps } from "./article-card-types";
 import Link from "next/link";
 import { styles } from "./article-card.styles";
 import { Title } from "../title/title";
+import NavigateNextSharpIcon from '@mui/icons-material/NavigateNextSharp';
 
 const ArticleCard: React.FC<ArticleCardProps> = ({
   title,
@@ -21,6 +25,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   image,
   link,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Card sx={styles.card}>
       <Stack
@@ -37,7 +44,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           />
         </Box>
         <CardContent sx={styles.cardContent}>
-          <Title title={title} />
+          <Title title={title} align={isMobile ? "center" : "left"} />
           <Box sx={styles.descriptionBox}>
             <Typography
               variant="subtitle1"
@@ -64,6 +71,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
             href={link}
             variant="outlined"
             sx={styles.button}
+            endIcon={<NavigateNextSharpIcon />}
           >
             Ler mais
           </Button>
