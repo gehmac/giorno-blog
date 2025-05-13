@@ -10,9 +10,9 @@ import { useParams } from "next/navigation";
 
 export default function Page() {
   const params = useParams()
-  const [postInfo, setPostInfo] = useState<Post | null>(null);
+  const [postInfo, setPostInfo] = useState<undefined | Post>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<undefined | string>();
 
   useEffect(() => {
     if (params.slug) {
